@@ -1,0 +1,2 @@
+INSERT INTO BOOK (ISBN, NAME, AUTHOR)
+VALUES ('9873161484100', 'Test Book', 'Test Author');
