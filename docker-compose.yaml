@@ -1,0 +1,40 @@
+services:
+  spring-boot-api:
+    build: .
+    image: spring-boot-api
+    ports:
+      - 8080:8080
+    networks:
+      - spring-boot-api-network
+    restart: always
+    deploy:
+      mode: global
+    environment:
+      - DB_HOST=mydb
+    depends_on: 
+      - mydb
+
+  mydb:
+    build: mariadb/.
+    image: mydb
+    volumes:
+      - mariadb:/var/lib/mysql
+    ports:
+      - 3306:3306
+    environment:
+      - MARIADB_PASSWORD=root
+      - MARIADB_ROOT_PASSWORD=root
+    networks:
+      - spring-boot-api-network
+    deploy:
+      mode: global
+
+networks:
+  spring-boot-api-network:
+    driver: bridge
+    ipam:
+        driver: default
+        config:
+          - subnet: 182.16.0.1/24
+            gateway: 182.16.0.1
+    name: spring-boot-api-network
