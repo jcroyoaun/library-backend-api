@@ -1,7 +1,6 @@
 services:
   spring-boot-api:
     build: .
-    image: spring-boot-api
     ports:
       - 8080:8080
     networks:
@@ -16,9 +15,8 @@ services:
 
   mydb:
     build: mariadb/.
-    image: mydb
     volumes:
-      - mariadb:/var/lib/mysql
+      - './data:/var/lib/mysql'
     ports:
       - 3306:3306
     environment:
