@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  library-backend-api
+  labels:
+    app: library-backend-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: library-backend-api
+  template:
+    metadata:
+      labels:
+        app: library-backend-api
+    spec:
+      containers:
+      - name: library-backend-image
+        image: library-backend-container
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        env:
+        - name: DB_HOST
+          value: "library-db-service" 

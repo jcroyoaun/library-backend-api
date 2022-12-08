@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: library-backend-service
+  labels:
+    app: library-backend-api
+spec:
+  selector:
+    app: library-backend-api
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 8080
+  type: ClusterIP
